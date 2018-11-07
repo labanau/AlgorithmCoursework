@@ -1,0 +1,4 @@
+You should read the paragraph from a suitable file format, such as .txt. The following
+tree operations should be implemented: a) Printing the tree in pre-order. b) Finding a word.
+Regardless whether found or not found your program should output the path traversed in
+determining the answer, followed by yes if found or no, respectively.
