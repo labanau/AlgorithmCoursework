@@ -16,10 +16,11 @@ public:
 
 public:
 	BinarySearchTree_Node(std::string key, int value);
-	~BinarySearchTree_Node();
 
 	void insertNode( std::string key, int value );
-	void pre_orderBST(BinarySearchTree_Node * root);
+	void pre_orderBST( BinarySearchTree_Node * root );
 	bool searchBST( std::string key );
+	BinarySearchTree_Node * deleteNode(BinarySearchTree_Node * root, std::string key );
+	BinarySearchTree_Node * findMinimum(BinarySearchTree_Node * root);
 };
 

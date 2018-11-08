@@ -62,3 +62,35 @@ void BinarySearchTree_Node::pre_orderBST(BinarySearchTree_Node * root) {
 		pre_orderBST(root->right);
 	}
 }
+
+BinarySearchTree_Node * BinarySearchTree_Node::deleteNode(BinarySearchTree_Node * root, std::string key) {
+	if (key < root->key) {
+		root->left = deleteNode(root->left, key);
+	}
+	else if (key > root->key) {
+		root->right = deleteNode(root->right, key);
+	}
+	else {
+		if (root->left == NULL && root->right == NULL) {
+			delete root;
+			root = NULL;
+		}
+		else if (root->left == NULL) {
+			root = root->right;
+		}
+		else if (root->right == NULL) {
+			root = root->left;
+		}
+		else {
+			BinarySearchTree_Node * temp = findMinimum(root->right);
+			root->key = temp ->key;
+			root->right = deleteNode(root->right, temp->key);
+		}
+	}
+	return root;
+}
+
+BinarySearchTree_Node * BinarySearchTree_Node::findMinimum(BinarySearchTree_Node * root) {
+	while (root->left != NULL) root = root->left;
+	return root;
+}
