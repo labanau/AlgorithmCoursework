@@ -11,12 +11,12 @@ Purpose: Create Binary search tree
 #include "BinarySearchTree_Node.h"
 
 /**
-Constructor for the BST class, creates the first node
+Constructor for the BST class creates the first node
 
 @param key - the word to store to the BST.
 @param value - the frequency of the word appearing in a file
 
-Storing both variables to one leaf, which why you can call them pair.
+Storing both variables to one leaf, which why you can call them a pair.
 */
 BinarySearchTree_Node::BinarySearchTree_Node(std::string key, int value) {
 	this->key = key;
@@ -25,6 +25,12 @@ BinarySearchTree_Node::BinarySearchTree_Node(std::string key, int value) {
 	this->right = NULL;
 }
 
+/**
+Inserts a new node to the BST
+
+@param key - the word to store to the BST.
+@param value - the frequency of the word appearing in a file
+*/
 void BinarySearchTree_Node::insertNode(std::string key, int value) {
 		if (key < this->key) {
 			if (this->left == NULL) {
@@ -44,6 +50,11 @@ void BinarySearchTree_Node::insertNode(std::string key, int value) {
 		}
 }
 
+/**
+Search for a node in a BST, by its key.
+
+@param key - the word used to find the node
+*/
 bool BinarySearchTree_Node::searchBST( std::string key) {
 	if (key == this->key) {
 		return true;
@@ -67,6 +78,11 @@ bool BinarySearchTree_Node::searchBST( std::string key) {
 	return false;
 }
 
+/**
+Print the BST in pre-order
+
+@param root - Binary search tree
+*/
 void BinarySearchTree_Node::pre_orderBST(BinarySearchTree_Node * root) {
 	std::cout << root->key << " : " << root->value << ", ";
 	if (root->left != 0) {
@@ -77,6 +93,12 @@ void BinarySearchTree_Node::pre_orderBST(BinarySearchTree_Node * root) {
 	}
 }
 
+/**
+Delete a node from a BST.
+
+@param root - Binary search tree, from which to delete the node
+@param key - the node to delete
+*/
 BinarySearchTree_Node * BinarySearchTree_Node::deleteNode(BinarySearchTree_Node * root, std::string key) {
 	if (key < root->key) {
 		root->left = deleteNode(root->left, key);
