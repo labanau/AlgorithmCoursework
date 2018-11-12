@@ -21,21 +21,12 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BinarySearchTree_Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ex_01.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ex_01.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BinarySearchTree_Node.cpp">
+    <ClCompile Include="unittest1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

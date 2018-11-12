@@ -1,9 +1,15 @@
+/**
+CourseWork 210CT, Ex_01.cpp
+Purpose: BinarySearchTree_Node.h : Declarations of the BST class
+
+@author Rokas Labanauskas
+*/
+
 #pragma once
 
 #include "stdafx.h"
 #include <string>
 #include <iostream>
-#include <map>
 
 class BinarySearchTree_Node
 {

@@ -1,9 +1,23 @@
+/**
+CourseWork 210CT, BinarySearchTree_Node.cpp
+Purpose: Create Binary search tree
+
+@author Rokas Labanauskas
+*/
+
 #include "stdafx.h"
 #include <iostream>
 #include <string>
 #include "BinarySearchTree_Node.h"
 
+/**
+Constructor for the BST class, creates the first node
 
+@param key - the word to store to the BST.
+@param value - the frequency of the word appearing in a file
+
+Storing both variables to one leaf, which why you can call them pair.
+*/
 BinarySearchTree_Node::BinarySearchTree_Node(std::string key, int value) {
 	this->key = key;
 	this->value = value;
