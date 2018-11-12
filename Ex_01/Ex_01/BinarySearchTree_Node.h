@@ -21,6 +21,7 @@ public:
 	BinarySearchTree_Node * right;
 
 public:
+
 	/**
 	Constructor for the BST class creates the first node
 
@@ -41,10 +42,8 @@ public:
 
 	/**
 	Print the BST in pre-order
-
-	@param root - Binary search tree
 	*/
-	void pre_orderBST( BinarySearchTree_Node * root );
+	void pre_orderBST();
 
 	/**
 	Search for a node in a BST, by its key.

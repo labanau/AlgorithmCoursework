@@ -83,13 +83,13 @@ Print the BST in pre-order
 
 @param root - Binary search tree
 */
-void BinarySearchTree_Node::pre_orderBST(BinarySearchTree_Node * root) {
-	std::cout << root->key << " : " << root->value << ", ";
-	if (root->left != 0) {
-		pre_orderBST(root->left);
+void BinarySearchTree_Node::pre_orderBST() {
+	std::cout << this->key << " : " << this->value << ", ";
+	if (this->left != 0) {
+		(this->left)->pre_orderBST(this->left);
 	}
 	if (root->right != 0) {
-		pre_orderBST(root->right);
+		(this->right)->pre_orderBST(this->right);
 	}
 }
 
@@ -119,7 +119,7 @@ BinarySearchTree_Node * BinarySearchTree_Node::deleteNode(BinarySearchTree_Node 
 		}
 		else {
 			BinarySearchTree_Node * temp = findMinimum(root->right);
-			root->key = temp ->key;
+			root->key = temp->key;
 			root->right = deleteNode(root->right, temp->key);
 		}
 	}
