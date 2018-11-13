@@ -1,17 +1,16 @@
 #pragma once
 #include <iostream>
-#include <vector>
-
-struct graph_node{
-	int destination;
-	int source;
-};
+#include <list>
 
 class Graph
 {
+private:
+	int vertices;
+	std::list<int> * adj_list;
 public:
-	std::vector<std::vector<int>> adj_list;
-	Graph(std::vector<graph_node> const &edges, int vertices);
+	Graph(int vertices);
 	~Graph();
+
+	void add_edge(int source, int destination);
 };
 

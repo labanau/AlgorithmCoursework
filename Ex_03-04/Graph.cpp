@@ -3,17 +3,17 @@
 #include <iostream>
 #include <vector>
 
-Graph::Graph(std::vector<graph_node> const &edges, int vertices)
+Graph::Graph(int vertices)
 {
-    adj_list.resize(vertices);
-
-    for(auto &edge : edges) {
-        adj_list[edge.source].push_back(edge.destination);
-
-        //adj_list[edge.destination].push_back(edge.source);
-    }
+	this->vertices = vertices;
+	adj_list = new std::list<int>[vertices];
 }
 
 Graph::~Graph()
 {
+}
+
+void Graph::add_edge(int source, int destination)
+{
+	adj_list[source].push_front(destination);
 }

@@ -40,7 +40,7 @@ void BinarySearchTree_Node::insertNode(std::string key, int value) {
 				this->left->insertNode( key, value);
 			}
 		}
-		else {
+		else { 
 			if (this->right == NULL) {
 				this->right = new BinarySearchTree_Node(key, value);
 			}
@@ -86,10 +86,10 @@ Print the BST in pre-order
 void BinarySearchTree_Node::pre_orderBST() {
 	std::cout << this->key << " : " << this->value << ", ";
 	if (this->left != 0) {
-		(this->left)->pre_orderBST(this->left);
+		(this->left)->pre_orderBST();
 	}
-	if (root->right != 0) {
-		(this->right)->pre_orderBST(this->right);
+	if (this->right != 0) {
+		(this->right)->pre_orderBST();
 	}
 }
 
