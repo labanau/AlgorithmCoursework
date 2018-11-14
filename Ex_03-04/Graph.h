@@ -1,16 +1,17 @@
 #pragma once
 #include <iostream>
-#include <list>
+#include <vector>
 
 class Graph
 {
 private:
 	int vertices;
-	std::list<int> * adj_list;
 public:
+	std::vector<int> * adj_list;
 	Graph(int vertices);
 	~Graph();
 
-	void add_edge(int source, int destination);
+	void add_edge( int source, int destination);
+	void print_graph();
 };
 
