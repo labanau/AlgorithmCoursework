@@ -64,6 +64,11 @@ bool Graph::isPath(int vertice1, int vertice2)
 	return false;
 }
 
+bool Graph::isStronglyConnected()
+{
+	return false;
+}
+
 void Graph::print_graph()
 {
 	for (int i = 0; i<this->vertices; i++) {
