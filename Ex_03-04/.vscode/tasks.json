@@ -4,11 +4,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build Graph",
+            "label": "build hello world",
             "type": "shell",
             "command": "g++",
             "args": [
-                "-g", "Ex_03-04.cpp" 
+                "-g", "Ex_03-04.cpp"
             ],
             "group": {
                 "kind": "build",
