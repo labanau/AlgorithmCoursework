@@ -38,37 +38,39 @@ void Graph::add_edge(int source, int destination, int weight)
 }
 
 int Graph::dijkstra(int source, int destination) {
-	std::vector<int> min_distance(this->vertices, INT_MAX);
+	try {
+		std::set<std::pair<int, int>> set; // Keep track of vertices in shortest path
+		std::vector<int> min_distance(this->vertices, INT_MAX);
+		set.insert(std::make_pair(0, source));
+		min_distance[source] = 0;
 
-	std::set<std::pair<int, int>> set;
+		while (!set.empty()) {
+			std::pair<int, int> temp_pair = *(set.begin());
+			set.erase(set.begin());
 
-	set.insert(std::make_pair(0, source));
+			int edge = temp_pair.second;
 
-	min_distance[source] = 0;
+			std::list<std::pair<int, int>>::iterator i;
 
-	while (!set.empty()) {
-		std::pair<int, int> temp_pair = *(set.begin());
-		set.erase(set.begin());
+			for (i = adj_list[edge].begin(); i != adj_list[edge].end(); i++) {
+				int vertice = i->first;
+				int weight = i->second;
 
-		int edge = temp_pair.second;
-
-		std::list<std::pair<int, int>>::iterator i;
-
-		for (i = adj_list[edge].begin(); i != adj_list[edge].end(); i++) {
-			int vertice = i->first;
-			int weight = i->second;
-
-			if (min_distance[vertice] > min_distance[edge] + weight) {
-				if (min_distance[vertice] != INT_MAX) {
-					set.erase(set.find(std::make_pair(min_distance[vertice], vertice)));
+				if (min_distance[vertice] > min_distance[edge] + weight) {
+					if (min_distance[vertice] != INT_MAX) {
+						set.erase(set.find(std::make_pair(min_distance[vertice], vertice)));
+					}
+					min_distance[vertice] = min_distance[edge] + weight;
+					set.insert(std::make_pair(min_distance[vertice], vertice));
 				}
-				min_distance[vertice] = min_distance[edge] + weight;
-				set.insert(std::make_pair(min_distance[vertice], vertice));
 			}
 		}
-	}
 
-	return min_distance[destination];
+		return min_distance[destination];
+	}
+	catch (std::out_of_range){
+		std::cout << "Out of bound!" << std::endl;
+	}
 }
 
 bool Graph::isPath(int vertice1, int vertice2)

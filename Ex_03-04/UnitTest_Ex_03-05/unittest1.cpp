@@ -69,7 +69,7 @@ namespace UnitTest_Ex_0305
 		{
 			Graph  * graph = createTree();
 
-			//Assert::ExpectException(, graph->dijkstra(0, 7));
+			Assert::AreEqual(7, graph->dijkstra(2, 0));
 		}
 		TEST_METHOD(TestMethod_shortest_path2)
 		{
