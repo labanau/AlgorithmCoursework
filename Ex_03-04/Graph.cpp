@@ -1,15 +1,24 @@
+/**
+CourseWork 210CT, Exercises from 3 to 6.
+Purpose: Graph.cpp : Graph class methods.
+
+@author Rokas Labanauskas
+*/
+
 #include "stdafx.h"
 #include "Graph.h"
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <stack>
 #include <list>
+#include <set>
+#include <numeric>
 
-Graph::Graph(int vertices)
+Graph::Graph(int vertices, bool directed)
 {
 	this->vertices = vertices;
-	adj_list = new std::list<int>[vertices];
+	this->directed = directed;
+	adj_list = new std::list<std::pair<int, int> >[vertices];
 }
 
 Graph::~Graph()
@@ -17,18 +26,57 @@ Graph::~Graph()
 	delete[] adj_list;
 }
 
-void Graph::add_edge(int source, int destination)
+void Graph::add_edge(int source, int destination, int weight)
 {
-	this->adj_list[source].push_back(destination);
-	this->adj_list[destination].push_back(source);
+	if (this->directed == true) {
+		adj_list[source].emplace_back(std::make_pair(destination, weight));
+	}
+	else {
+		adj_list[source].emplace_back(std::make_pair(destination, weight));
+		adj_list[destination].emplace_back(std::make_pair(source, weight));
+	}
+}
+
+int Graph::dijkstra(int source, int destination) {
+	std::vector<int> min_distance(this->vertices, INT_MAX);
+
+	std::set<std::pair<int, int>> set;
+
+	set.insert(std::make_pair(0, source));
+
+	min_distance[source] = 0;
+
+	while (!set.empty()) {
+		std::pair<int, int> temp_pair = *(set.begin());
+		set.erase(set.begin());
+
+		int edge = temp_pair.second;
+
+		std::list<std::pair<int, int>>::iterator i;
+
+		for (i = adj_list[edge].begin(); i != adj_list[edge].end(); i++) {
+			int vertice = i->first;
+			int weight = i->second;
+
+			if (min_distance[vertice] > min_distance[edge] + weight) {
+				if (min_distance[vertice] != INT_MAX) {
+					set.erase(set.find(std::make_pair(min_distance[vertice], vertice)));
+				}
+				min_distance[vertice] = min_distance[edge] + weight;
+				set.insert(std::make_pair(min_distance[vertice], vertice));
+			}
+		}
+	}
+
+	return min_distance[destination];
 }
 
 bool Graph::isPath(int vertice1, int vertice2)
-{	
+{
 	std::vector<bool> vertixe_visited(this->vertices);
 	std::queue<int> temp_queue;
 	std::vector<int> parent(this->vertices, -1);
-	std::list<int>::iterator i; // Iteratpr used for the vector cycle at the bottom
+	std::list<std::pair<int, int>>::iterator i; // Iteratpr used for the vector cycle at the bottom
 	//to get all vertices in the adj_list.
 
 	if (vertice1 == vertice2) {
@@ -47,13 +95,15 @@ bool Graph::isPath(int vertice1, int vertice2)
 		temp_queue.pop();
 
 		for (i = adj_list[vertice1].begin(); i != adj_list[vertice1].end(); i++) {
-			if (!vertixe_visited[*i]) {
-				vertixe_visited[*i] = true;
-				temp_queue.push(*i);
-				parent[*i] = vertice1;
-				if (*i == vertice2) {
+			int vertice = (*i).first;
+			
+			if (!vertixe_visited[vertice]) {
+				vertixe_visited[vertice] = true;
+				temp_queue.push(vertice);
+				parent[vertice] = vertice1;
+				if (vertice == vertice2) {
 					std::cout << "Path: ";
-					print_path(parent, *i);
+					print_path(parent, vertice);
 					std::cout << std::endl;
 					return true;
 				}
@@ -63,21 +113,22 @@ bool Graph::isPath(int vertice1, int vertice2)
 	return false;
 }
 
+
 bool Graph::isConnected()
 {
 	std::vector<bool> vertices_visited(this->vertices);
 	for (int vertice = 0; vertice < this->vertices; vertice++)
 		vertices_visited[vertice] = false;
 
-	for (int vertice = 0; vertice<this->vertices; vertice++)
+	for (int vertice = 2; vertice<this->vertices; vertice++)
 	{
 		if (vertices_visited[vertice] == false)
 		{
 			dfs_util(vertice, vertices_visited);
 
 			std::cout << "\n";
-			return true;
 		}
+		return true;
 	}
 	return false;
 }
@@ -93,16 +144,30 @@ void Graph::print_path(std::vector<int>& parent, int i)
 	std::cout << " -> " << i;
 }
 
+
+void Graph::print_current_graph()
+{
+	std::list<std::pair<int, int>>::iterator j;
+	for (int i = 0; i < this->vertices; i++) {
+		std::cout << i << " - > ";
+		for (j = adj_list[i].begin(); j != adj_list[i].end(); j++) {
+			int v = (*j).first;
+			std::cout << v << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+
 void Graph::dfs_util(int vertice, std::vector<bool> vertixe_visited) {
 	vertixe_visited[vertice] = true;
 
 	std::cout << vertice << " ";
 
-	std::list<int>::iterator j;
+	std::list<std::pair<int, int>>::iterator j;
 
 	for (j = adj_list[vertice].begin(); j != adj_list[vertice].end(); j++) {
-		if (!vertixe_visited[*j]) {
-			dfs_util(*j, vertixe_visited);
+		if (!vertixe_visited[(*j).first]) {
+			dfs_util((*j).first, vertixe_visited);
 		}
 	}
 }
@@ -115,5 +180,7 @@ void Graph::dfs(int vertice)
 	for (int i = 0; i < this->vertices; i++)
 		vertice_visited[i] = false;
 
-	dfs_util(vertice, vertice_visited);
+	for (int i = 0; i < this->vertices; i++)
+		if(vertice_visited[i] = false)
+			dfs_util(i, vertice_visited);
 }
