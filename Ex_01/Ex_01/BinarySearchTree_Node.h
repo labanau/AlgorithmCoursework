@@ -59,6 +59,6 @@ public:
 	@param key - the node to delete
 	*/
 	BinarySearchTree_Node * delete_node(BinarySearchTree_Node * root, std::string key );
-	BinarySearchTree_Node * findMinimum(BinarySearchTree_Node * root);
+	BinarySearchTree_Node * find_min(BinarySearchTree_Node * root);
 };
 

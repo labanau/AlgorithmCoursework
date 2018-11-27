@@ -122,7 +122,7 @@ BinarySearchTree_Node * BinarySearchTree_Node::delete_node(BinarySearchTree_Node
 			root = root->left;
 		}
 		else {
-			BinarySearchTree_Node * temp = findMinimum(root->right);
+			BinarySearchTree_Node * temp = find_min(root->right);
 			root->key = temp->key;
 			root->right = delete_node(root->right, temp->key);
 		}
@@ -130,7 +130,8 @@ BinarySearchTree_Node * BinarySearchTree_Node::delete_node(BinarySearchTree_Node
 	return root;
 }
 
-BinarySearchTree_Node * BinarySearchTree_Node::findMinimum(BinarySearchTree_Node * root) {
-	while (root->left != NULL) root = root->left;
+BinarySearchTree_Node * BinarySearchTree_Node::find_min(BinarySearchTree_Node * root) {
+	while (root->left != NULL) 
+		root = root->left;
 	return root;
 }
