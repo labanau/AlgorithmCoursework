@@ -29,11 +29,9 @@ Graph::~Graph()
 
 void Graph::add_edge(int source, int destination, int weight)
 {
-	if (this->directed == true) {
-		adj_list[source].emplace_back(std::make_pair(destination, weight));
-	}
-	else {
-		adj_list[source].emplace_back(std::make_pair(destination, weight));
+	adj_list[source].emplace_back(std::make_pair(destination, weight));
+
+	if (this->directed == false) {
 		adj_list[destination].emplace_back(std::make_pair(source, weight));
 	}
 }
@@ -69,7 +67,7 @@ int Graph::dijkstra(int source, int destination) {
 
 		return min_distance[destination];
 	}
-	catch (std::out_of_range){
+	catch (std::out_of_range) {
 		std::cout << "Out of bound!" << std::endl;
 	}
 }
@@ -98,18 +96,22 @@ bool Graph::is_path(int vertice1, int vertice2)
 
 		for (i = adj_list[vertice1].begin(); i != adj_list[vertice1].end(); i++) {
 			int vertice = (*i).first;
-			
+
 			if (!vertixe_visited[vertice]) {
+
 				vertixe_visited[vertice] = true;
 				temp_queue.push(vertice);
 				parent[vertice] = vertice1;
+
 				if (vertice == vertice2) {
+
 					std::ofstream file("output_bfs.txt");
 					std::cout << "Path: ";
 					print_path(parent, vertice, file);
 					std::cout << std::endl;
 					file.close();
 					return true;
+
 				}
 			}
 		}
@@ -126,11 +128,11 @@ bool Graph::is_connected()
 	for (int vertice = 0; vertice < this->vertices; vertice++)
 		vertices_visited[vertice] = false;
 
-	for (int vertice = 2; vertice<this->vertices; vertice++)
+	for (int vertice = 2; vertice < this->vertices; vertice++)
 	{
 		if (vertices_visited[vertice] == false)
 		{
-			dfs_util(vertice, vertices_visited,file);
+			dfs_util(vertice, vertices_visited, file);
 
 			std::cout << "\n";
 			return true;
