@@ -73,13 +73,12 @@ int Graph::dijkstra(int source, int destination) {
 	}
 }
 
-bool Graph::isPath(int vertice1, int vertice2)
+bool Graph::is_path(int vertice1, int vertice2)
 {
 	std::vector<bool> vertixe_visited(this->vertices);
 	std::queue<int> temp_queue;
 	std::vector<int> parent(this->vertices, -1);
-	std::list<std::pair<int, int>>::iterator i; // Iteratpr used for the vector cycle at the bottom
-	//to get all vertices in the adj_list.
+	std::list<std::pair<int, int>>::iterator i;
 
 	if (vertice1 == vertice2) {
 		return true;
@@ -116,7 +115,7 @@ bool Graph::isPath(int vertice1, int vertice2)
 }
 
 
-bool Graph::isConnected()
+bool Graph::is_connected()
 {
 	std::vector<bool> vertices_visited(this->vertices);
 	for (int vertice = 0; vertice < this->vertices; vertice++)
@@ -178,7 +177,6 @@ void Graph::dfs(int vertice)
 {
 	std::vector<bool> vertice_visited(this->vertices);
 
-	// mark everything to be false
 	for (int i = 0; i < this->vertices; i++)
 		vertice_visited[i] = false;
 

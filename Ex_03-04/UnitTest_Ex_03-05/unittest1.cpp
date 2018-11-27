@@ -39,31 +39,31 @@ namespace UnitTest_Ex_0305
 		{
 			Graph  * graph = createTree();
 
-			Assert::AreEqual(true, graph->isPath(0, 3));
+			Assert::AreEqual(true, graph->is_path(0, 3));
 		}
 		TEST_METHOD(TestMethod_is_there_path2)
 		{
 			Graph  * graph = createTree();
 
-			Assert::AreEqual(true, graph->isPath(0, 1));
+			Assert::AreEqual(true, graph->is_path(0, 1));
 		}
 		TEST_METHOD(TestMethod_is_there_path3)
 		{
 			Graph  * graph = createTree();
 
-			Assert::AreEqual(false, graph->isPath(0, 4));
+			Assert::AreEqual(false, graph->is_path(0, 4));
 		}
 		TEST_METHOD(TestMethod_is_there_path4)
 		{
 			Graph  * graph = createTree();
 
-			Assert::AreEqual(false, graph->isPath(0, 7));
+			Assert::AreEqual(false, graph->is_path(0, 7));
 		}
 		TEST_METHOD(TestMethod_is_strongly_connected)
 		{
 			Graph  * graph = createTree();
 
-			Assert::AreEqual(true, graph->isConnected());
+			Assert::AreEqual(true, graph->is_connected());
 		}
 		TEST_METHOD(TestMethod_shortest_path)
 		{

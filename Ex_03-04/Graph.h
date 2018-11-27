@@ -52,7 +52,6 @@ public:
 	
 	@return None
 	*/
-
 	void add_edge( int source, int destination, int weight);
 
 	/**
@@ -60,14 +59,14 @@ public:
 	
 	@return bool - If there is a path True if not, False.
 	*/
-	bool isPath( int vertice1, int vertice2);
+	bool is_path( int vertice1, int vertice2);
 	
 	/**
 	Check if a graph is strongly connected
 	
 	@return bool - If it is strongly connected return True if not, False.
 	*/
-	bool isConnected();
+	bool is_connected();
 
 	/**
 	DFS utility, helper for DFS function
