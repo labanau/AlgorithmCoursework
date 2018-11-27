@@ -73,7 +73,7 @@ public:
 	
 	@return None
 	*/
-	void dfs_util(int vertice, std::vector<bool> vertex_visited);
+	void dfs_util(int vertice, std::vector<bool> vertixe_visited, std::ostream &file);
 	
 	/**
 	Main DFS function
@@ -91,6 +91,6 @@ public:
 	
 	// Both functioncs are print fuinctions, one used to print the current graph and other the path.
 
-	void print_path(std::vector<int> &parent, int i);
+	void print_path(std::vector<int> &parent, int i, std::ostream &file);
 	void print_current_graph();
 };

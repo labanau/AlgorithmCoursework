@@ -13,6 +13,7 @@ Purpose: Graph.cpp : Graph class methods.
 #include <list>
 #include <set>
 #include <numeric>
+#include <fstream>
 
 Graph::Graph(int vertices, bool directed)
 {
@@ -103,9 +104,11 @@ bool Graph::is_path(int vertice1, int vertice2)
 				temp_queue.push(vertice);
 				parent[vertice] = vertice1;
 				if (vertice == vertice2) {
+					std::ofstream file("output_bfs.txt");
 					std::cout << "Path: ";
-					print_path(parent, vertice);
+					print_path(parent, vertice, file);
 					std::cout << std::endl;
+					file.close();
 					return true;
 				}
 			}
@@ -117,6 +120,8 @@ bool Graph::is_path(int vertice1, int vertice2)
 
 bool Graph::is_connected()
 {
+	std::ofstream file("output_dfs.txt");
+	std::vector<int> graph_path;
 	std::vector<bool> vertices_visited(this->vertices);
 	for (int vertice = 0; vertice < this->vertices; vertice++)
 		vertices_visited[vertice] = false;
@@ -125,24 +130,27 @@ bool Graph::is_connected()
 	{
 		if (vertices_visited[vertice] == false)
 		{
-			dfs_util(vertice, vertices_visited);
+			dfs_util(vertice, vertices_visited,file);
 
 			std::cout << "\n";
+			return true;
 		}
-		return true;
 	}
+	file.close();
 	return false;
 }
 
-void Graph::print_path(std::vector<int>& parent, int i)
+void Graph::print_path(std::vector<int>& parent, int i, std::ostream &file)
 {
 	if (parent[i] == -1) {
 		std::cout << i;
+		file << i;
 		return;
 	}
 
-	print_path(parent, parent[i]);
+	print_path(parent, parent[i], file);
 	std::cout << " -> " << i;
+	file << " -> " << i;
 }
 
 
@@ -159,28 +167,33 @@ void Graph::print_current_graph()
 	}
 }
 
-void Graph::dfs_util(int vertice, std::vector<bool> vertixe_visited) {
+void Graph::dfs_util(int vertice, std::vector<bool> vertixe_visited, std::ostream &file) {
 	vertixe_visited[vertice] = true;
 
 	std::cout << vertice << " ";
+	file << vertice << " ";
 
 	std::list<std::pair<int, int>>::iterator j;
 
 	for (j = adj_list[vertice].begin(); j != adj_list[vertice].end(); j++) {
 		if (!vertixe_visited[(*j).first]) {
-			dfs_util((*j).first, vertixe_visited);
+			dfs_util((*j).first, vertixe_visited, file);
 		}
 	}
 }
 
 void Graph::dfs(int vertice)
 {
+	std::ofstream file2("output_dfs.txt");
+
 	std::vector<bool> vertice_visited(this->vertices);
 
 	for (int i = 0; i < this->vertices; i++)
 		vertice_visited[i] = false;
 
 	for (int i = 0; i < this->vertices; i++)
-		if(vertice_visited[i] = false)
-			dfs_util(i, vertice_visited);
+		if (vertice_visited[i] = false)
+			dfs_util(i, vertice_visited, file2);
+
+	file2.close();
 }
