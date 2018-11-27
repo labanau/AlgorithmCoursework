@@ -38,19 +38,19 @@ public:
 	@param key - the word to store to the BST.
 	@param value - the frequency of the word appearing in a file
 	*/
-	void insertNode( std::string key, int value );
+	void insert_node( std::string key, int value );
 
 	/**
 	Print the BST in pre-order
 	*/
-	void pre_orderBST();
+	void pre_order_binary_tree();
 
 	/**
 	Search for a node in a BST, by its key.
 
 	@param key - the word used to find the node
 	*/
-	bool searchBST( std::string key );
+	bool search_binary_tree( std::string key );
 
 	/**
 	Delete a node from a BST.
@@ -58,7 +58,7 @@ public:
 	@param root - Binary search tree, from which to delete the node
 	@param key - the node to delete
 	*/
-	BinarySearchTree_Node * deleteNode(BinarySearchTree_Node * root, std::string key );
+	BinarySearchTree_Node * delete_node(BinarySearchTree_Node * root, std::string key );
 	BinarySearchTree_Node * findMinimum(BinarySearchTree_Node * root);
 };
 

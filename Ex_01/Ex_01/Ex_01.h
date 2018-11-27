@@ -16,7 +16,7 @@ Read a paragraph of words from a file.
 
 @return vector - with the words in the vector as string type
 */
-std::vector<std::string> readFile();
+std::vector<std::string> read_file();
 
 /**
 Count words frequencies.
@@ -25,7 +25,7 @@ Count words frequencies.
 
 @return vector - which has the frequencies as int type;
 */
-std::vector<int> countFreqOfWord(std::vector<std::string> words);
+std::vector<int> count_freq_of_words(std::vector<std::string> words);
 
 /**
 Creates the BST tree.
@@ -35,7 +35,7 @@ Creates the BST tree.
 
 @return root - The created binary search tree.
 */
-BinarySearchTree_Node * createTree(std::vector<std::string> words, std::vector<int> frequenc);
+BinarySearchTree_Node * create_tree(std::vector<std::string> words, std::vector<int> frequenc);
 
 
 /**

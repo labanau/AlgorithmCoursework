@@ -31,13 +31,13 @@ Inserts a new node to the BST
 @param key - the word to store to the BST.
 @param value - the frequency of the word appearing in a file
 */
-void BinarySearchTree_Node::insertNode(std::string key, int value) {
+void BinarySearchTree_Node::insert_node(std::string key, int value) {
 		if (key < this->key) {
 			if (this->left == NULL) {
 				this->left = new BinarySearchTree_Node(key, value);
 			}
 			else {
-				this->left->insertNode( key, value);
+				this->left->insert_node( key, value);
 			}
 		}
 		else { 
@@ -45,7 +45,7 @@ void BinarySearchTree_Node::insertNode(std::string key, int value) {
 				this->right = new BinarySearchTree_Node(key, value);
 			}
 			else {
-				this->right->insertNode( key, value);
+				this->right->insert_node( key, value);
 			}
 		}
 }
@@ -55,7 +55,7 @@ Search for a node in a BST, by its key.
 
 @param key - the word used to find the node
 */
-bool BinarySearchTree_Node::searchBST( std::string key) {
+bool BinarySearchTree_Node::search_binary_tree( std::string key) {
 	std::cout << " -> " << this->key;
 	if (key == this->key) {
 		std::cout << " Found!" << std::endl;
@@ -67,7 +67,7 @@ bool BinarySearchTree_Node::searchBST( std::string key) {
 			return false;
 		}
 		else {
-			return (this -> left) -> searchBST(key);
+			return (this -> left) -> search_binary_tree(key);
 		}
 	}
 	else {
@@ -76,7 +76,7 @@ bool BinarySearchTree_Node::searchBST( std::string key) {
 			return false;
 		}
 		else {
-			return (this -> right) -> searchBST(key);
+			return (this -> right) -> search_binary_tree(key);
 		}
 	}
 	return false;
@@ -87,13 +87,13 @@ Print the BST in pre-order
 
 @param root - Binary search tree
 */
-void BinarySearchTree_Node::pre_orderBST() {
+void BinarySearchTree_Node::pre_order_binary_tree() {
 	std::cout << this->key << " : " << this->value << ", ";
 	if (this->left != 0) {
-		(this->left)->pre_orderBST();
+		(this->left)->pre_order_binary_tree();
 	}
 	if (this->right != 0) {
-		(this->right)->pre_orderBST();
+		(this->right)->pre_order_binary_tree();
 	}
 }
 
@@ -103,12 +103,12 @@ Delete a node from a BST.
 @param root - Binary search tree, from which to delete the node
 @param key - the node to delete
 */
-BinarySearchTree_Node * BinarySearchTree_Node::deleteNode(BinarySearchTree_Node * root, std::string key) {
+BinarySearchTree_Node * BinarySearchTree_Node::delete_node(BinarySearchTree_Node * root, std::string key) {
 	if (key < root->key) {
-		root->left = deleteNode(root->left, key);
+		root->left = delete_node(root->left, key);
 	}
 	else if (key > root->key) {
-		root->right = deleteNode(root->right, key);
+		root->right = delete_node(root->right, key);
 	}
 	else {
 		if (root->left == NULL && root->right == NULL) {
@@ -124,7 +124,7 @@ BinarySearchTree_Node * BinarySearchTree_Node::deleteNode(BinarySearchTree_Node 
 		else {
 			BinarySearchTree_Node * temp = findMinimum(root->right);
 			root->key = temp->key;
-			root->right = deleteNode(root->right, temp->key);
+			root->right = delete_node(root->right, temp->key);
 		}
 	}
 	return root;

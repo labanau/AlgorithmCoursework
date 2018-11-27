@@ -12,48 +12,61 @@ namespace UnitTest_Ex0102
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-		BinarySearchTree_Node * createTree() 
+		BinarySearchTree_Node * create_tree() 
 		{
 			BinarySearchTree_Node * root = new BinarySearchTree_Node("root", 1);
 
-			root->insertNode("amazing", 2);
-			root->insertNode("lol", 2);
-			root->insertNode("beautiful", 2);
-			root->insertNode("great", 2);
+			root->insert_node("amazing", 2);
+			root->insert_node("lol", 2);
+			root->insert_node("beautiful", 2);
+			root->insert_node("great", 2);
 
 			return root;
 		}
 		
 		TEST_METHOD(TestMethod_searchKeyInt)
 		{ 
-			BinarySearchTree_Node * root = createTree();
+			BinarySearchTree_Node * root = create_tree();
 			
-			Assert::AreEqual(false, root->searchBST("0000"));
+			Assert::AreEqual(false, root->search_binary_tree("0000"));
 		}
 
 		TEST_METHOD(TestMethod_searchKeyString) 
 		{	
-			BinarySearchTree_Node * root = createTree();
+			BinarySearchTree_Node * root = create_tree();
 
-			Assert::AreEqual(true, root->searchBST("great"));
+			Assert::AreEqual(true, root->search_binary_tree("great"));
 		}
 
 		TEST_METHOD(TestMethod_InsertNewNodeAndSearch)
 		{
-			BinarySearchTree_Node * root = createTree();
+			BinarySearchTree_Node * root = create_tree();
 
-			root->insertNode("respect", 10);
+			root->insert_node("respect", 10);
 
-			Assert::AreEqual(true, root->searchBST("respect"));
+			Assert::AreEqual(true, root->search_binary_tree("respect"));
 		}
 
 		TEST_METHOD(TestMethod_DeleteNodeAndSearch)
 		{
-			BinarySearchTree_Node * root = createTree();
+			BinarySearchTree_Node * root = create_tree();
 
-			root->deleteNode(root, "great");
+			root->delete_node(root, "great");
 
-			Assert::AreEqual(false, root->searchBST("great"));
+			Assert::AreEqual(false, root->search_binary_tree("great"));
+		}
+		TEST_METHOD(TestMethod_searchKeyString2)
+		{
+			BinarySearchTree_Node * root = create_tree();
+
+			Assert::AreEqual(false, root->search_binary_tree("not"));
+		}
+
+		TEST_METHOD(TestMethod_searchKeyString3)
+		{
+			BinarySearchTree_Node * root = create_tree();
+
+			Assert::AreEqual(false, root->search_binary_tree("no"));
 		}
 	};
 }
