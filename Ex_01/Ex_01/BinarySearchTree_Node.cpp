@@ -56,7 +56,6 @@ Search for a node in a BST, by its key.
 @param key - the word used to find the node
 */
 bool BinarySearchTree_Node::search_binary_tree( std::string key) {
-	std::cout << " -> " << this->key;
 	if (key == this->key) {
 		std::cout << " Found!" << std::endl;
 		return true;

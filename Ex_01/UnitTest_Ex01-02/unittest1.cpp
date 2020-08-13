@@ -68,5 +68,12 @@ namespace UnitTest_Ex0102
 
 			Assert::AreEqual(false, root->search_binary_tree("no"));
 		}
+
+		TEST_METHOD(TestMethod_initiliazingEmptyTree)
+		{
+			BinarySearchTree_Node* root = create_tree();
+
+			Assert::AreEqual(false, root->value == NULL ? false : true);
+		}
 	};
 }
